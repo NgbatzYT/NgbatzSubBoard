@@ -1,18 +1,18 @@
-﻿using System.IO;
-using System.Net.Http;
-using System.Reflection;
-using BepInEx;
-using HarmonyLib;
-using Newtonsoft.Json.Linq;
-using TMPro;
-using UnityEngine;
-using BepInEx.Configuration;
-
-namespace NgbatzSubBoard
-{
-    [BepInPlugin("ngbatz.ngbatzsubboard", "NgbatzSubBoard", "1.0.0")]
-    public class Plugin : BaseUnityPlugin
-    {
+﻿using System.IO; // 🐀🐀🐀🐀🐀🐀🐀
+using System.Net.Http;// 🐀🐀🐀🐀🐀🐀🐀
+using System.Reflection;// 🐀🐀🐀🐀🐀🐀🐀
+using BepInEx;// 🐀🐀🐀🐀🐀🐀🐀
+using HarmonyLib;// 🐀🐀🐀🐀🐀🐀🐀
+using Newtonsoft.Json.Linq;// 🐀🐀🐀🐀🐀🐀🐀
+using TMPro;// 🐀🐀🐀🐀🐀🐀🐀
+using UnityEngine;// 🐀🐀🐀🐀🐀🐀🐀
+using BepInEx.Configuration;// 🐀🐀🐀🐀🐀🐀🐀
+// 🐀🐀🐀🐀🐀🐀🐀
+namespace NgbatzSubBoard// 🐀🐀🐀🐀🐀🐀🐀
+{// 🐀🐀🐀🐀🐀🐀🐀
+    [BepInPlugin("ngbatz.ngbatzsubboard", "NgbatzSubBoard", "1.0.0")]// 🐀🐀🐀🐀🐀🐀🐀
+    public class Plugin : BaseUnityPlugin// 🐀🐀🐀🐀🐀🐀🐀
+    {// 🐀🐀🐀🐀🐀🐀🐀
         private ConfigEntry<string> ChannelID;
         TextMeshPro txt;
 
@@ -59,3 +59,4 @@ namespace NgbatzSubBoard
 
     }
 }
+
