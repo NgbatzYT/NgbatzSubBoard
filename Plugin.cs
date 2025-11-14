@@ -1,13 +1,12 @@
-﻿using System.IO;
-using System.Net.Http;
-using System.Reflection;
 using BepInEx;
+using BepInEx.Configuration;
 using HarmonyLib;
 using Newtonsoft.Json.Linq;
+using System.IO;
+using System.Net.Http;
+using System.Reflection;
 using TMPro;
 using UnityEngine;
-using BepInEx.Configuration;
-using System.Collections;
 
 namespace NgbatzSubBoard
 {
@@ -24,25 +23,25 @@ namespace NgbatzSubBoard
             ChannelID = Config.Bind("General", "ChannelID", "UCm-PH9-cRJj6PcPeqoo_Xbw", "This is the channel ID that the live sub count will use.");
             TikTok = Config.Bind("General", "TikTok", false, "This is if you want to have the TikTok mode.");
             TikTokHandle = Config.Bind("General", "TikTokHandle", "realgorillatagvr", "This is your TikTok handle without the @");
-            
+
             var harmony = Harmony.CreateAndPatchAll(GetType().Assembly, "ngbatz.ngbatzsubboard");
             GorillaTagger.OnPlayerSpawned(OnGameInitialized);
         }
 
         void OnGameInitialized()
         {
-            var e = LoadAssetBundle("NgbatzSubBoard.sub");
-            
-            var r = Instantiate(e.LoadAsset<GameObject>("NgSubBoard"));
-            
+            Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("NgbatzSubBoard.sub");
+            AssetBundle bundle = AssetBundle.LoadFromStream(stream);
+            stream.Close();
+
+            var r = Instantiate(bundle.LoadAsset<GameObject>("NgSubBoard"));
+
             r.transform.position = new Vector3(-62.733f, 12.5845f, -83.5582f);
             r.transform.rotation = Quaternion.Euler(0f, 3f, 0f);
-            
+
             txt = r.transform.Find("Board/SubText").GetComponent<TextMeshPro>();
 
-            if(!txt) { Logger.LogInfo("Assetbundle most likely failed to load."); return; }
-            UpdateSubCount();
-            StartCoroutine(UpdateCount());
+            InvokeRepeating(nameof(UpdateSubCount), 0, 300);
         }
 
         async void UpdateSubCount()
@@ -69,24 +68,6 @@ namespace NgbatzSubBoard
                 txt.text = $"FOLLOW\n\n<size=50%>FOLLOWERS: {followersCount}";
             }
         }
-
-        private IEnumerator UpdateCount()
-        {
-            while (true) { 
-                yield return new WaitForSeconds(300);
-            
-                UpdateSubCount();
-            }
-        }
-
-        public AssetBundle LoadAssetBundle(string path)
-        {
-            Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(path);
-            AssetBundle bundle = AssetBundle.LoadFromStream(stream);
-            stream.Close();
-            return bundle;
-        }
-
     }
 }
 
