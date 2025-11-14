@@ -53,8 +53,8 @@ namespace NgbatzSubBoard
                 string ppp = await pp.GetStringAsync($"https://api.socialcounts.org/youtube-live-subscriber-count/{ChannelID.Value}");
                 var ligma = JObject.Parse(ppp);
 
-                string subCount = ligma["est_sub"].ToString() ?? "Failed to get";
-                string viewsCount = ligma["table"]?[0]?["count"]?.ToString() ?? "Failed to get";
+                string subCount = ligma["counters"]?["estimation"]?["subscriberCount"].ToString() ?? "Failed to get";
+                string viewsCount = ligma["counters"]?["estimation"]?["viewCount"]?.ToString() ?? "Failed to get";
 
                 txt.text = $"SUBSCRIBE\n\n<size=50%>SUBSCRIBERS: {subCount}\n\nVIEWS: {viewsCount}</size>";
             }
@@ -89,3 +89,4 @@ namespace NgbatzSubBoard
 
     }
 }
+
