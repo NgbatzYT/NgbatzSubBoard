@@ -11,7 +11,7 @@ using System.Collections;
 
 namespace NgbatzSubBoard
 {
-    [BepInPlugin("ngbatz.ngbatzsubboard", "NgbatzSubBoard", "1.1.1")]
+    [BepInPlugin("ngbatz.ngbatzsubboard", "NgbatzSubBoard", "1.1.2")]
     public class Plugin : BaseUnityPlugin
     {
         private ConfigEntry<string> ChannelID;
@@ -89,4 +89,5 @@ namespace NgbatzSubBoard
 
     }
 }
+
 
